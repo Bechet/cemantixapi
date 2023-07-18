@@ -18,4 +18,9 @@ public class CemantixBusinessImpl implements CemantixBusiness {
     public List<WordValue> getMostSimilar(String word, int size) {
         return cemantixDao.getMostSimilar(word, size);
     }
+
+    @Override
+    public float getSimilarity(String word1, String word2) {
+        return cemantixDao.getSimilarity(word1, word2);
+    }
 }
