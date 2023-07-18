@@ -26,4 +26,11 @@ public class CemantixController {
         @RequestParam(name="nbItem", required = false, defaultValue = "10") int nbItem) {
         return cemantixBusiness.getMostSimilar(word, nbItem);
     }
+
+    @GetMapping("/similarity")
+    public float getSimilarity(
+            @RequestParam(name="word1") String word1,
+            @RequestParam(name="word2") String word2) {
+        return cemantixBusiness.getSimilarity(word1, word2);
+    }
 }

@@ -24,7 +24,9 @@ public class CemantixDaoImpl implements CemantixDao {
     @Override
     public List<WordValue> getMostSimilar(String word, int size) {
         final String s = webClient.get()
-                .uri(uriBuilder -> uriBuilder.queryParam("word", word).build())
+                .uri(uriBuilder -> uriBuilder
+                        .path("most_similar")
+                        .queryParam("word", word).build())
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
@@ -43,5 +45,18 @@ public class CemantixDaoImpl implements CemantixDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public float getSimilarity(String word1, String word2) {
+        final float f = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("similarity")
+                        .queryParam("word1", word1)
+                        .queryParam("word2", word2).build())
+                .retrieve()
+                .bodyToMono(float.class)
+                .block();
+        return f;
     }
 }
